@@ -1,0 +1,225 @@
+<mt:setvarblock name="page_title">Your Profile</mt:setvarblock>
+<mt:setvar name="include_javascript" value="1">
+
+<mt:include module="Header">
+<link rel="stylesheet" href="<mt:StaticWebPath>css/messaging.css" type="text/css" />
+
+<mt:if name="error">
+    <mtapp:statusmsg
+        id="generic-error"
+        class="error">
+        <mt:var name="error">
+    </mtapp:statusmsg>
+</mt:if>
+
+<mt:if name="saved">
+    <mtapp:statusmsg
+        id="saved"
+        class="success">
+        This profile has been updated.
+    </mtapp:statusmsg>
+</mt:if>
+
+        <span name="name" id="name"><img src="<mt:CommenterAuthIconURL>" /> <strong><mt:if name="auth_mode_mt"><mt:var name="name" escape="html"><mt:else><mt:var name="nickname"></mt:if></strong></span>
+
+
+<div id="edit-profile"<mt:unless name="edit_profile"> style="display: none"</mt:unless>>
+
+<form method="post" action="<mt:var name="script_url">">
+
+<input type="hidden" name="__mode" value="save_userprofile" />
+<input type="hidden" name="magic_token" value="<mt:var name="magic_token">" />
+<input type="hidden" name="id" value="<mt:var name="id" escape="html">" />
+<input type="hidden" name="tmpl_id" value="<mt:var name="tmpl_id" escape="html">" />
+<input type="hidden" name="entry_url" value="<mt:var name="entry_url" escape="html">" />
+<input type="hidden" name="return_url" value="<mt:var name="return_url" escape="html">" />
+<input type="hidden" name="name" value="<mt:var name="name" escape="html">" />
+
+    <mtapp:setting
+        id="profile_image"
+        label="Profile Image"
+        hint="Your Profile Image.">
+<p><MTIfCommenterImage>
+   <img src="<MTCommenterImageURL>" /></a>
+   <a href="#" onclick="return Upload();">Change Profile Image</a> (<a href="<mt:var name="script_url">?__mode=remove_image&blog_id=<mt:BlogID>&return_args=<mt:var name="return_args" encode_url="1">">Remove Image</a>)
+<MTElse>
+   <a href="javascript:void(0)" onclick="return Upload();">Add a Profile Image</a>
+</MTIfCommenterImage></p>
+    </mtapp:setting>
+
+<mt:if name="auth_mode_mt">
+    <mtapp:setting
+        id="nickname"
+        label="Display Name"
+        hint="The name appears on your comment.">
+        <input name="nickname" id="nickname" value="<mt:var name="nickname" escape="html">" />
+    </mtapp:setting>
+
+    <mtapp:setting
+        id="email"
+        label="Email Address"
+        required="$email_required"
+        hint="Your email address.">
+        <input name="email" id="email" value="<mt:var name="email" escape="html">" />
+    </mtapp:setting>
+
+    <mtapp:setting
+        id="password"
+        label="New Password"
+        hint="Select a password for yourself.">
+        <input type="password" name="password" id="password" value="" />
+    </mtapp:setting>
+
+    <mtapp:setting
+        id="pass_verify"
+        label="Confirm Password"
+        hint="Repeat the password for confirmation.">
+        <input type="password" name="pass_verify" id="pass_verify" value="" />
+    </mtapp:setting>
+
+    <mtapp:setting
+        id="hint"
+        label="Password recovery"
+        required="1"
+        hint="This word or phrase will be required to recover the password if you forget it.">
+        <input name="hint" id="hint" value="<mt:var name="hint" escape="html">" />
+    </mtapp:setting>
+
+    <mtapp:setting
+        id="url"
+        label="Website URL"
+        hint="The URL of your website. (Optional)">
+        <input name="url" id="url" value="<mt:var name="url" escape="html">"  />
+    </mtapp:setting>
+
+<mt:else>
+    <input name="nickname" type="hidden" value="<mt:var name="nickname" escape="html">" />
+    <input name="email" type="hidden" value="<mt:var name="email" escape="html">" />
+    <input name="url" type="hidden" value="<mt:var name="url" escape="html">" />
+    <input type="hidden" name="external_auth" value="1" />
+</mt:if>
+
+    <mtapp:setting
+        id="remember"
+        label=""
+        hint="Check the box to be logged in automatically when you return to this site.">
+<p><input type="checkbox" id="comment-bake-cookie" name="bakecookie" value="1" /> Keep me signed in on this computer</p>
+    </mtapp:setting>
+
+<p><input type="submit" name="submit" accesskey="s" value="Save" /></p>
+
+</form>
+
+<MTIfUserProfilesPro>
+  <p><a href="javascript:void(0)" onclick="return ExtendedProfile();">Edit Extended Profile</a></p>
+</MTIfUserProfilesPro>
+
+</div>
+
+<div id="upload-photo"<mt:unless name="upload_photo"> style="display: none"</mt:unless>>
+
+<form method="post" enctype="multipart/form-data" action="<mt:var name="script_url">">
+    <input type="hidden" name="__mode" value="add_image" />
+    <input type="hidden" name="blog_id" value="<mt:BlogID>" />
+    <input type="hidden" name="author_id" value="<mt:var name="author_id">" />
+    <input type="hidden" name="site_path" value="1" />
+    <input type="hidden" name="return_args" value="<mt:var name="return_args" encode_url="1">" />
+    <input type="hidden" name="extra_path" value="<mt:var name="extra_path">" />
+    <input type="hidden" name="magic_token" value="<mt:var name="magic_token">" />
+
+    <mtapp:setting
+        id="file"
+        label_class="top-label"
+        label="Select File to Upload"
+        hint=""
+        show_hint="0">
+        <input type="file" name="file" />
+    </mtapp:setting>
+
+
+    <div class="actions-bar">
+        <div class="actions-bar-inner pkg actions">
+            <button
+                type="submit"
+                accesskey="s"
+                title="Upload (s)"
+                class="primary-button"
+                >Upload</button>
+            <button
+                onclick="CancelUpload(); return false"
+                type="submit"
+                accesskey="x"
+                title="Cancel (x)"
+                >Cancel</button>
+        </div>
+    </div>
+
+</form>
+
+</div>
+
+<MTIfUserProfilesPro>
+<div id="edit-extended-profile"<mt:unless name="extended_profile"> style="display: none"</mt:unless>>
+
+    <form name="userprofile" id="userprofile" method="post" action="<mt:var name="script_url">">
+    <input type="hidden" name="__mode" value="save_extendedprofile" />
+    <input type="hidden" name="return_args" value="<mt:var name="return_args" escape="html">" />
+    <input type="hidden" name="magic_token" value="<mt:var name="magic_token">" />
+    <input type="hidden" id="author_id" name="author_id" value="<mt:var name="author_id">" />
+
+<mt:var name="fields">
+
+    <div class="actions-bar">
+        <div class="actions-bar-inner pkg actions">
+            <button
+                type="submit"
+                accesskey="s"
+                title="Save (s)"
+                class="primary-button"
+                >Save</button>
+            <button
+                onclick="CancelUpload(); return false"
+                type="submit"
+                accesskey="x"
+                title="Cancel (x)"
+                >Cancel</button>
+        </div>
+    </div>
+
+    </form>
+
+</div>
+</MTIfUserProfilesPro>
+
+<mt:if name="entry_url">
+<p>Return to the <a href="<mt:var name="entry_url">">original entry</a>.</p>
+<mt:else>
+<p>Return to the <a href="<mt:var name="return_url">">original page</a>.</p>
+</mt:else></mt:if>
+
+
+<script type="text/javascript">
+<!--
+function Upload() {
+  hideDocumentElement('edit-profile');
+  showDocumentElement('upload-photo');
+} 
+function CancelUpload() {
+  hideDocumentElement('upload-photo');
+<MTIfUserProfilesPro>  hideDocumentElement('edit-extended-profile'); </MTIfUserProfilesPro>
+  showDocumentElement('edit-profile');
+}
+<MTIfUserProfilesPro>
+function ExtendedProfile() {
+  hideDocumentElement('edit-profile');
+  showDocumentElement('edit-extended-profile');
+}
+</MTIfUserProfilesPro>
+function hide(id) {
+  hideDocumentElement(id);
+}
+//-->
+</script>
+
+<mt:include module="Footer">
+

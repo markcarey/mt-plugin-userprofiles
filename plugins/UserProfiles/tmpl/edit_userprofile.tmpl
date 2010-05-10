@@ -1,0 +1,64 @@
+<mt:setvar name="edit_author" value="1">
+<$mt:setvar name="position_actions_bottom" value="1"$>
+<mt:setvarblock name="page_title"><__trans phrase="Edit Extended Profile"></mt:setvarblock>
+<mt:setvarblock name="content_nav">
+<mt:if name="author_id">
+  <mt:setvar name"nav_author_id" value="$author_id">
+<mt:else>
+  <mt:if name="id">
+    <mt:setvar name"nav_author_id" value="$id">
+  </mt:if>
+</mt:if>
+<ul>
+    <li><a href="<mt:var name="SCRIPT_URL">?__mode=view&amp;_type=author<mt:if name="nav_author_id">&amp;id=<mt:var name="nav_author_id"></mt:if>"><b><__trans phrase="Profile"></b></a></li>
+	<li class="active"><a href="<mt:var name="SCRIPT_URL">?__mode=edit_userprofile&author_id=<mt:var name="nav_author_id">"><b><__trans phrase="Extended"></b></a></li>
+    <li><a href="<mt:var name="SCRIPT_URL">?__mode=list_associations&amp;author_id=<mt:var name="nav_author_id">"><b><__trans phrase="Permissions"></b></a></li>
+</ul>
+</mt:setvarblock>
+<mt:setvarblock name="content_header" id="content_header">
+<mt:if name="saved">
+    <mtapp:statusmsg
+        id="saved"
+        class="success">
+        <__trans phrase="This profile has been updated.">
+    </mtapp:statusmsg>
+</mt:if>
+<mt:if name="error">
+    <mtapp:statusmsg
+        id="generic-error"
+        class="error">
+        <mt:var name="error">
+    </mtapp:statusmsg>
+</mt:if>
+</mt:setvarblock>
+<mt:include name="include/header.tmpl">
+
+
+        <form name="userprofile" id="userprofile" method="post" action="<mt:var name="script_url">">
+            <input type="hidden" name="__mode" value="save_userprofile" />
+            <input type="hidden" name="return_args" value="<mt:var name="return_args" escape="html">" />
+            <input type="hidden" name="magic_token" value="<mt:var name="magic_token">" />
+<mt:if name="id">
+            <input type="hidden" name="id" value="<mt:var name="id">" />
+</mt:if>
+<mt:if name="author_id">
+            <input type="hidden" id="author_id" name="author_id" value="<mt:var name="author_id">" />
+</mt:if>
+
+            <fieldset>
+                <h3><__trans phrase="Extended Profile"></h3>
+
+<mt:var name="fields">
+
+<mt:setvarblock name="action_buttons">
+    <button
+        type="submit"
+        accesskey="s"
+        title="<__trans phrase="Save changes to this [_1] (s)" params="<mt:var name="object_label" lower_case="1">">"
+        class="primary-button"
+        ><__trans phrase="Save Changes"></button>
+</mt:setvarblock>
+<mt:include name="include/actions_bar.tmpl" bar_position="bottom" hide_pager="1" settings_bar="1">
+        </form>
+
+<mt:include name="include/footer.tmpl">

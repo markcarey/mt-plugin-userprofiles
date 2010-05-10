@@ -1,0 +1,106 @@
+<MTSetVar name="include_javascript" value="1">
+<MTSetVarBlock name="page_title">Profile for <MTAuthorDisplayName></MTSetVarBlock>
+
+<MTInclude module="Header">
+
+<h2 class="asset-name">Profile for <MTAuthorDisplayName></h2>
+
+<MTIfAuthorImage><img src="<MTAuthorImageURL>" /> &nbsp;</MTIfAuthorImage>
+
+<div style="margin:15px"><a href="javascript:void(0)" onclick="return showProfile();">Profile</a> - <a href="javascript:void(0)" onclick="return showEntries();">Entries</a> - <a href="javascript:void(0)" onclick="return showComments();">Comments</a></div>
+
+<div id="tab-profile">
+
+<MTIfNonEmpty tag="MTAuthorURL"><p><strong>Website: </strong><a href="<MTAuthorURL>"><MTAuthorURL></a></p></MTIfNonEmpty>
+
+<MTIfNonEmpty tag="MTUserProfile" field="about_me"><p><strong>About Me: </strong><MTUserProfile field="about_me"></p></MTIfNonEmpty>
+
+<MTIfNonEmpty tag="MTUserProfile" field="city"><p><strong>City: </strong><MTUserProfile field="city"></p></MTIfNonEmpty>
+
+<MTIfNonEmpty tag="MTUserProfile" field="state"><p><strong>State/Prov: </strong><MTUserProfile field="state"></p></MTIfNonEmpty>
+
+<MTIfNonEmpty tag="MTUserProfile" field="country"><p><strong>Country: </strong><MTUserProfile field="country"></p></MTIfNonEmpty>
+
+<MTIfNonEmpty tag="MTUserProfile" field="mobile_phone"><p><strong>Mobile Phone: </strong><MTUserProfile field="mobile_phone"></p></MTIfNonEmpty>
+
+<MTIfNonEmpty tag="MTUserProfile" field="land_phone"><p><strong>Land Phone: </strong><MTUserProfile field="land_phone"></p></MTIfNonEmpty>
+
+<MTIfNonEmpty tag="MTUserProfile" field="sex"><p><strong>Sex: </strong><MTUserProfile field="sex"></p></MTIfNonEmpty>
+
+<MTIfNonEmpty tag="MTUserProfile" field="marital_status"><p><strong>Marital Status: </strong><MTUserProfile field="marital_status"></p></MTIfNonEmpty>
+
+<MTIfNonEmpty tag="MTUserProfile" field="birthdate"><p><strong>Birthdate: </strong><MTUserProfile field="birthdate" date_format="%Y-%m-%d" escape="html"></p></MTIfNonEmpty>
+
+<MTIfNonEmpty tag="MTUserProfile" field="occupation"><p><strong>Occupation: </strong><MTUserProfile field="occupation"></p></MTIfNonEmpty>
+
+<MTIfNonEmpty tag="MTUserProfile" field="company"><p><strong>Company: </strong><MTUserProfile field="company"></p></MTIfNonEmpty>
+
+<MTIfNonEmpty tag="MTUserProfile" field="activities"><p><strong>Activities: </strong><MTUserProfile field="activities"></p></MTIfNonEmpty>
+
+<MTIfNonEmpty tag="MTUserProfile" field="interests"><p><strong>Interests: </strong><MTUserProfile field="interests"></p></MTIfNonEmpty>
+
+<MTIfNonEmpty tag="MTUserProfile" field="music"><p><strong>Favorite Music: </strong><MTUserProfile field="music"></p></MTIfNonEmpty>
+
+<MTIfNonEmpty tag="MTUserProfile" field="tv_shows"><p><strong>Favorite TV Shows: </strong><MTUserProfile field="tv_shows"></p></MTIfNonEmpty>
+
+<MTIfNonEmpty tag="MTUserProfile" field="movies"><p><strong>Favorite Movies: </strong><MTUserProfile field="movies"></p></MTIfNonEmpty>
+
+<MTIfNonEmpty tag="MTUserProfile" field="books"><p><strong>Favorite Books: </strong><MTUserProfile field="books"></p></MTIfNonEmpty>
+
+<MTIfNonEmpty tag="MTUserProfile" field="quotes"><p><strong>Favorite Quotes: </strong><MTUserProfile field="quotes"></p></MTIfNonEmpty>
+
+</div>
+
+<div id="tab-entries" style="display:none">
+
+<h2 class="asset-name">Recent Entries by <MTAuthorDisplayName></h2>
+
+      <ul class="widget-list">
+      <MTEntries lastn="10" author="$author_name">
+         <li class="widget-list-item"><a href="<$MTEntryPermalink$>"><$MTEntryTitle$></a></li>
+      <MTElse>
+         <li class="widget-list-item"><MTAuthorDisplayName> has posted no entries.</li>
+      </MTEntries>
+      </ul>
+
+</div>
+
+<div id="tab-comments" style="display:none">
+
+<h2 class="asset-name">Recent Replies by <MTAuthorDisplayName></h2>
+
+      <ul class="widget-list">
+<MTAuthorComments sort_order="descend">
+  <li><MTCommentEntry>On '<a href="<MTEntryPermalink>"><MTEntryTitle></a>'</MTCommentEntry>: <$MTCommentBody$></li>
+      <MTElse>
+         <li class="widget-list-item"><MTAuthorDisplayName> has posted no comments.</li>
+</MTAuthorComments> 
+      </ul>
+
+</div>
+
+<script type="text/javascript">
+<!--
+function showProfile() {
+  hide('tab-entries');
+  hide('tab-comments');
+  showDocumentElement('tab-profile');
+} 
+function showEntries() {
+  hide('tab-profile');
+  hide('tab-comments');
+  showDocumentElement('tab-entries');
+} 
+function showComments() {
+  hide('tab-entries');
+  hide('tab-profile');
+  showDocumentElement('tab-comments');
+} 
+function hide(id) {
+  hideDocumentElement(id);
+}
+//-->
+
+</script>
+
+<MTInclude module="Footer">

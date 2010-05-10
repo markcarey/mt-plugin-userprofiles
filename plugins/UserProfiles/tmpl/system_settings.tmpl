@@ -1,0 +1,35 @@
+<mtapp:setting
+    id="profile_blog_id"
+    label="<__trans phrase="Blog ID for User Profiles">"
+    hint="<__trans phrase="Enter the blog id where the User Profiles templates and images will be placed.">"
+    show_hint="1">
+			<input name="profile_blog_id" type="text" size="10" value="<TMPL_VAR NAME=PROFILE_BLOG_ID>"></input>&nbsp;
+</mtapp:setting>
+
+<mt:ignore>
+<mtapp:setting
+    id="profile_publish_path"
+    label="<__trans phrase="Profile Publish Path">"
+    hint="<__trans phrase="This should be a path relative to the blog's root path.  For example: images/profile/">"
+    show_hint="1">
+			<input name="profile_upload_path" type="text" value="<TMPL_VAR NAME=PROFILE_UPLOAD_PATH>"></input>&nbsp;
+</mtapp:setting>
+</mt:ignore>
+
+<mtapp:setting
+    id="install_userprofiles_templates"
+    label="<__trans phrase="Install User Profiles Templates">"
+    hint=""
+	class="actions-bar"
+    show_hint="0">
+
+<mt:if name="profile_blog_id">
+    <div class="actions-bar-inner pkg actions">
+        <a href="javascript:void(0)" onclick="return openDialog(false, 'install_userprofiles_templates','template_path=plugins/UserProfiles/default_templates&amp;set=user_profiles&amp;blog_id=<mt:var name="profile_blog_id">&amp;return_args=__mode%3Dcfg_plugins%26%26blog_id%3D$blog_id')" class="primary-button"><__trans phrase="Install Templates"></a>
+	</div>
+<mt:else>
+	<p>Please choose a Blog ID above and save your settings. Then return here to install the template into your chosen blog.</p>  
+	<p>Note: if you don't know your Blog ID number, go to the Dashboard for the blog you want and look in the address bar of your browser.  At the end of the address, you should see something like "blog_id=1".  The number after blog_id= is the Blog ID.</p>
+</mt:if>
+
+</mtapp:setting>

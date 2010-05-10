@@ -1,0 +1,27 @@
+<mt:setvarblock name="page_title"><__trans phrase="Template Installer Not Found"></mt:setvarblock>
+<mt:include name="dialog/header.tmpl">
+
+
+
+	<style>.tip {margin-top: 60px; font-size: 10pt; border: 1px solid black; padding: 10px;}</style>
+	<div class="tip">
+    <mtapp:statusmsg
+        id="generic-error"
+        class="error">
+
+	<p><em>You need the Template Installer plugin to install templates.</em> Template Installer is a free plugin from MT Hacks. <a href="http://mt-hacks.com/templateinstaller.html" target="_blank">Click here get Template Installer</a>. [Link opens in new window]</p>
+    </mtapp:statusmsg>
+	</div>
+
+    <div class="actions-bar">
+        <div class="actions-bar-inner pkg actions">
+            <button
+                onclick="closeDialog(); return false"
+                type="submit"
+                accesskey="x"
+                title="<__trans phrase="Close (x)">"
+                ><__trans phrase="Close"></button>
+        </div>
+    </div>
+
+<mt:include name="dialog/footer.tmpl">

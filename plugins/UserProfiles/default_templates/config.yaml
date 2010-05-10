@@ -1,0 +1,24 @@
+template_sets:
+  user_profiles:
+    label: User Profiles
+    base_path: templates
+    order: 1000
+    templates:
+      index:
+        javascript:
+          label: JavaScript
+          outfile: mt.js
+          rebuild_me: 0
+      individual:
+      page:
+      archive:
+      custom:
+        edit_user_profile:
+          label: Edit User Profile
+        user_profile:
+          label: User Profile
+        yui_javascript:
+          label: YUI Javascript
+      widget:
+      system:
+

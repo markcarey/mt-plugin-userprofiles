@@ -1,0 +1,38 @@
+<mt:unless name="direct_asset_insert"><mt:setvarblock name="screen_type">dialog-screen new-asset</mt:setvarblock></mt:unless>
+<mt:setvarblock name="page_title"><__trans phrase="Save Profile Image"></mt:setvarblock>
+
+<mt:include name="dialog/header.tmpl">
+<p>Here is the image you uploaded:</p>
+
+<img src="<mt:assetthumbnailurl width="50" height="50">" />
+
+<p>Do you want to save this image as your Profile Image?</p>
+
+<form action="<mt:var name="script_url">" method="post" target="_top">
+    <input type="hidden" name="__mode" value="save_profile_image" />
+    <input type="hidden" name="asset_id" value="<mt:var name="asset_id">" />
+    <input type="hidden" name="author_id" value="<mt:var name="author_id">" />
+    <input type="hidden" name="blog_id" value="<mt:var name="blog_id">" />
+    <input type="hidden" name="fname" value="<mt:var name="fname" escape="html">" />
+    <input type="hidden" name="url" value="<mt:var name="url" escape="html">" />
+    <input type="hidden" name="magic_token" value="<mt:var name="magic_token">" />
+
+    <div class="actions-bar">
+        <div class="actions-bar-inner actions">
+            <button
+                type="submit"
+                accesskey="s"
+                title="<__trans phrase="Yes">"
+                class="primary-button"
+                ><__trans phrase="Yes"></button>
+            <button
+                onclick="closeDialog(); return false"
+                type="submit"
+                accesskey="x"
+                title="<__trans phrase="No">"
+                ><__trans phrase="No"></button>
+        </div>
+    </div>
+</form>
+
+<mt:include name="dialog/footer.tmpl">

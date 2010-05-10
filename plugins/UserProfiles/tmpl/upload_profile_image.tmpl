@@ -1,0 +1,45 @@
+<mt:setvarblock name="page_title"><__trans phrase="Add Profile Image"></mt:setvarblock>
+<mt:include name="dialog/header.tmpl">
+
+<form method="post" enctype="multipart/form-data" action="<mt:var name="script_url">">
+    <input type="hidden" name="__mode" value="upload_file" />
+    <input type="hidden" name="userprofiles" value="1" />
+    <input type="hidden" name="blog_id" value="<mt:var name="blog_id">" />
+    <input type="hidden" name="author_id" value="<mt:var name="author_id">" />
+    <input type="hidden" name="site_path" value="1" />
+    <input type="hidden" name="middle_path" value="" />
+    <input type="hidden" name="entry_insert" value="" />
+    <input type="hidden" name="edit_field" value="" />
+    <input type="hidden" name="extra_path" value="<mt:var name="extra_path">" />
+    <input type="hidden" name="magic_token" value="<mt:var name="magic_token">" />
+
+    <mtapp:setting
+        id="file"
+        label_class="top-label"
+        label="<__trans phrase="Select File to Upload">"
+        hint=""
+        show_hint="0">
+        <input type="file" name="file" />
+    </mtapp:setting>
+
+
+    <div class="actions-bar">
+        <div class="actions-bar-inner pkg actions">
+            <button
+                type="submit"
+                accesskey="s"
+                title="<__trans phrase="Upload (s)">"
+                class="primary-button"
+                ><__trans phrase="Upload"></button>
+            <button
+                onclick="closeDialog(); return false"
+                type="submit"
+                accesskey="x"
+                title="<__trans phrase="Cancel (x)">"
+                ><__trans phrase="Cancel"></button>
+        </div>
+    </div>
+
+</form>
+
+<mt:include name="dialog/footer.tmpl">
